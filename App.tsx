@@ -1,4 +1,5 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -8,11 +9,16 @@ import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import ChatBot from "./components/ChatBot";
 import Socials from "./components/Socials";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
+import ShortUrlRedirect from "./pages/ShortUrlRedirect";
 
-const App: React.FC = () => {
+// portfolio landing page - the main public-facing content
+const PortfolioPage: React.FC = () => {
   return (
     <div className="relative min-h-screen selection:bg-emerald-500 selection:text-white">
-      {/* Dynamic background effect */}
+      {/* dynamic background effect */}
       <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-900/5 rounded-full blur-[150px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-cyan-900/5 rounded-full blur-[150px]"></div>
@@ -77,6 +83,23 @@ const App: React.FC = () => {
 
       <ChatBot />
     </div>
+  );
+};
+
+// app with routing - login and dashboard are hidden routes (not linked from portfolio)
+// catch-all route redirects unknown paths to home page
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<PortfolioPage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/analytics" element={<Analytics />} />
+      {/* short URL redirect - catches /:slug patterns */}
+      <Route path="/:slug" element={<ShortUrlRedirect />} />
+      {/* catch-all: redirect any unknown route to home */}
+      <Route path="*" element={<PortfolioPage />} />
+    </Routes>
   );
 };
 
