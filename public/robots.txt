@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raghav-dwivedi.dev/sitemap.xml
