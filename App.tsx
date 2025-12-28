@@ -49,7 +49,7 @@ const App: React.FC = () => {
               <span className="text-emerald-500">securely</span>.
             </h3>
             <a
-              href="mailto:hi@raghav.dev"
+              href="mailto:dwivediji425@gmail.com"
               className="inline-flex items-center px-8 sm:px-14 py-4 sm:py-6 bg-emerald-600 rounded-2xl text-white font-bold text-base sm:text-xl hover:shadow-[0_20px_50px_rgba(16,185,129,0.3)] transition-all transform hover:-translate-y-2 active:scale-95 animate-fade-up stagger-2"
             >
               Get in Touch
