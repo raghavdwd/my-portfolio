@@ -13,7 +13,7 @@ export const RESUME_DATA: ResumeData = {
   name: "Raghvendra Dwivedi",
   role: "Full-Stack Developer",
   summary:
-    "I'm a Full-Stack Developer with a deep love for backend systems and cybersecurity. Currently building Linkbase and contributing to open source, I enjoy solving complex problems whether it's optimizing real-time sockets, securing APIs, or just making code run faster. I believe in building software that's not just functional, but resilient and secure.",
+    "Full-stack developer specializing in backend systems, real-time applications, and performance tuning. Over the last two years of freelancing, I've delivered scalable solutions for global clients across marketing automation, e-commerce infrastructure, and SEO tooling while consistently improving system throughput by 30%+.",
   location: "Lucknow, India 226017",
   email: "raghavdwd@gmail.com",
   phone: "+91 8887947867",
@@ -50,18 +50,26 @@ export const RESUME_DATA: ResumeData = {
     },
   ],
   skills: {
-    languages: ["JavaScript", "TypeScript", "PHP", "Python", "C++"],
-    frontend: [
-      "React.js",
-      "Next.js",
-      "HTML/CSS",
-      "Tailwind CSS",
-      "Responsive Design",
-    ],
-    backend: ["Node.js", "Express.js", "REST APIs", "WebSockets"],
-    tools: ["MongoDB", "MySQL", "Git/GitHub", "Linux", "Excloud", "Prisma"],
+    languages: ["JavaScript", "TypeScript", "Java", "Python", "C++"],
+    frontend: ["React.js", "Next.js", "HTML/CSS", "Responsive Design"],
+    backend: ["Node.js", "Express.js", "REST APIs", "WebSockets", "Real-time Systems"],
+    tools: ["MongoDB", "MySQL", "PostgreSQL", "AWS", "Git/GitHub", "Linux", "Cron Jobs", "OOP"],
   },
   experience: [
+    {
+      company: "Self-Employed",
+      role: "Freelance Full-Stack Developer",
+      location: "Lucknow",
+      startDate: "Jul 2024",
+      endDate: "Present",
+      points: [
+        "Delivered production-grade applications for international clients across marketing automation, e-commerce infrastructure, and organic growth tooling with measurable impact on conversion rates and lead quality.",
+        "Architected an email outreach platform with React and Express.js backed by MySQL, introducing campaign automation, template libraries, and deliverability analytics for 10,000+ monthly contacts.",
+        "Built a Node.js CLI utility that classifies catalog products into precise e-commerce categories using async pipelines and data heuristics, helping sellers organize 500+ SKUs with 95% accuracy.",
+        "Developed an SEO keyword intelligence system with Next.js and PostgreSQL that ingests millions of search results to surface low-competition opportunities, driving sustainable organic traffic strategies for clients.",
+        "Optimized caching layers, background jobs, and database indexing resulting in up to 40% faster response times and significant hosting cost savings across freelance engagements.",
+      ],
+    },
     {
       company: "Cangra Talents",
       role: "Software Developer Intern",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Github, ExternalLink, Loader2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 interface Contribution {
   date: string;
@@ -21,7 +21,6 @@ export const GithubActivity: React.FC = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    // Fetch last year's contributions using a public proxy
     fetch("https://github-contributions-api.jogruber.de/v4/raghavdwd?y=last")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
@@ -37,7 +36,6 @@ export const GithubActivity: React.FC = () => {
       });
   }, []);
 
-  // Process data into weeks for the grid
   const weeks = useMemo(() => {
     if (!data?.contributions) return [];
 
@@ -45,12 +43,9 @@ export const GithubActivity: React.FC = () => {
     const weeksArray: Contribution[][] = [];
     let currentWeek: Contribution[] = [];
 
-    // Calculate padding for the first week to align days correctly
-    // GitHub weeks usually start on Sunday (0)
     const firstDate = new Date(days[0].date);
-    const dayOfWeek = firstDate.getDay(); // 0 = Sunday
+    const dayOfWeek = firstDate.getDay();
 
-    // Add placeholders for days before the start date
     for (let i = 0; i < dayOfWeek; i++) {
       currentWeek.push({ date: "", count: 0, level: -1 });
     }
@@ -63,7 +58,6 @@ export const GithubActivity: React.FC = () => {
       }
     });
 
-    // Push remaining days
     if (currentWeek.length > 0) {
       weeksArray.push(currentWeek);
     }
@@ -71,49 +65,33 @@ export const GithubActivity: React.FC = () => {
     return weeksArray;
   }, [data]);
 
-  // GitHub specific colors
   const getLevelColor = (level: number) => {
-    // Dark Mode Colors
-    const darkColors = [
-      "dark:bg-[#161b22]", // Level 0
-      "dark:bg-[#0e4429]", // Level 1
-      "dark:bg-[#006d32]", // Level 2
-      "dark:bg-[#26a641]", // Level 3
-      "dark:bg-[#39d353]", // Level 4
+    const colors = [
+      "bg-zinc-100 dark:bg-zinc-800",
+      "bg-emerald-200 dark:bg-emerald-900",
+      "bg-emerald-300 dark:bg-emerald-700",
+      "bg-emerald-400 dark:bg-emerald-600",
+      "bg-emerald-500 dark:bg-emerald-500",
     ];
-
-    // Light Mode Colors
-    const lightColors = [
-      "bg-[#ebedf0]", // Level 0
-      "bg-[#9be9a8]", // Level 1
-      "bg-[#40c463]", // Level 2
-      "bg-[#30a14e]", // Level 3
-      "bg-[#216e39]", // Level 4
-    ];
-
-    if (level === -1) return "bg-transparent"; // Placeholder
-    return `${lightColors[level] || lightColors[0]} ${
-      darkColors[level] || darkColors[0]
-    }`;
+    if (level === -1) return "bg-transparent";
+    return colors[level] || colors[0];
   };
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-48 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-        <Loader2 className="animate-spin text-slate-400" size={24} />
-      </div>
+      <div className="h-28 bg-zinc-100 dark:bg-zinc-900 rounded-lg animate-pulse" />
     );
   }
 
   if (error || !data) {
     return (
-      <div className="p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-center text-slate-500">
-        Unable to load GitHub activity.
+      <div className="p-4 bg-zinc-100 dark:bg-zinc-900 rounded-lg text-center text-sm text-zinc-500">
+        Unable to load activity.{" "}
         <a
           href="https://github.com/raghavdwd"
           target="_blank"
           rel="noreferrer"
-          className="text-primary-500 hover:underline ml-1"
+          className="text-zinc-900 dark:text-white hover:underline"
         >
           View on GitHub
         </a>
@@ -121,69 +99,39 @@ export const GithubActivity: React.FC = () => {
     );
   }
 
-  const totalContributions =
-    data.total.lastYear || Object.values(data.total).reduce((a, b) => a + b, 0);
+  const totalContributions = data.total.lastYear || 0;
 
   return (
-    <div className="p-4 md:p-6 bg-white dark:bg-[#0d1117] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-      <div className="flex flex-col gap-4">
-        {/* Graph Container with Scroll */}
-        <div className="w-full overflow-x-auto pb-2 custom-scrollbar">
-          <div className="min-w-max">
-            {/* Weeks Row */}
-            <div className="flex gap-[3px]">
-              {weeks.map((week, weekIndex) => (
-                <div key={weekIndex} className="flex flex-col gap-[3px]">
-                  {week.map((day, dayIndex) => (
-                    <div
-                      key={`${weekIndex}-${dayIndex}`}
-                      className={`w-[10px] h-[10px] rounded-[2px] ${getLevelColor(
-                        day.level
-                      )}`}
-                      title={
-                        day.date
-                          ? `${day.count} contributions on ${day.date}`
-                          : ""
-                      }
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
+    <div className="p-4 bg-white dark:bg-zinc-900 rounded-lg border border-zinc-100 dark:border-zinc-800">
+      <div className="w-full overflow-x-auto">
+        <div className="min-w-max">
+          <div className="flex gap-[2px]">
+            {weeks.map((week, weekIndex) => (
+              <div key={weekIndex} className="flex flex-col gap-[2px]">
+                {week.map((day, dayIndex) => (
+                  <div
+                    key={`${weekIndex}-${dayIndex}`}
+                    className={`w-[10px] h-[10px] rounded-sm ${getLevelColor(
+                      day.level
+                    )}`}
+                    title={day.date ? `${day.count} on ${day.date}` : ""}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </div>
-
-        {/* Footer: Stats & Legend */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400 pt-2">
-          <div className="flex items-center gap-4">
-            <span className="font-medium text-slate-900 dark:text-slate-200">
-              {totalContributions} contributions in the last year
-            </span>
-            <a
-              href="https://github.com/raghavdwd"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-1 hover:text-primary-500 transition-colors"
-            >
-              raghavdwd <ExternalLink size={10} />
-            </a>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span>Less</span>
-            <div className="flex gap-[3px]">
-              {[0, 1, 2, 3, 4].map((level) => (
-                <div
-                  key={level}
-                  className={`w-[10px] h-[10px] rounded-[2px] ${getLevelColor(
-                    level
-                  )}`}
-                />
-              ))}
-            </div>
-            <span>More</span>
-          </div>
-        </div>
+      </div>
+      <div className="flex items-center justify-between mt-3 text-xs text-zinc-500">
+        <span>{totalContributions} contributions last year</span>
+        <a
+          href="https://github.com/raghavdwd"
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-1 hover:text-zinc-900 dark:hover:text-white transition-colors"
+        >
+          @raghavdwd <ExternalLink size={10} />
+        </a>
       </div>
     </div>
   );

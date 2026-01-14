@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <script>
@@ -44,10 +44,9 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ["Inter", "sans-serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
             },
             colors: {
-              // Overwrite default grays with Zinc for a premium feel
               slate: {
                 50: "#fafafa",
                 100: "#f4f4f5",
@@ -61,38 +60,6 @@
                 900: "#18181b",
                 950: "#09090b",
               },
-              // Refined primary accent - subtle Indigo/Violet
-              primary: {
-                50: "#eff6ff",
-                100: "#dbeafe",
-                500: "#6366f1", // Indigo-500
-                600: "#4f46e5", // Indigo-600
-                900: "#312e81",
-              },
-            },
-            animation: {
-              "fade-in": "fadeIn 0.8s ease-out forwards",
-              "fade-in-up": "fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-              float: "float 6s ease-in-out infinite",
-              "pulse-glow": "pulseGlow 4s ease-in-out infinite",
-            },
-            keyframes: {
-              fadeIn: {
-                "0%": { opacity: "0" },
-                "100%": { opacity: "1" },
-              },
-              fadeInUp: {
-                "0%": { opacity: "0", transform: "translateY(30px)" },
-                "100%": { opacity: "1", transform: "translateY(0)" },
-              },
-              float: {
-                "0%, 100%": { transform: "translateY(0)" },
-                "50%": { transform: "translateY(-15px)" },
-              },
-              pulseGlow: {
-                "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
-                "50%": { opacity: "0.7", transform: "scale(1.05)" },
-              },
             },
           },
         },
@@ -100,72 +67,21 @@
     </script>
     <style>
       body {
-        font-family: "Inter", sans-serif;
+        font-family: "Inter", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
       }
-      /* Custom scrollbar for cleanliness */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
         background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        background-color: #cbd5e1;
-        border-radius: 20px;
+        background-color: #d4d4d8;
+        border-radius: 3px;
       }
       .dark ::-webkit-scrollbar-thumb {
-        background-color: #334155;
-      }
-
-      /* Animation delay utilities for stagger effects */
-      .delay-100 {
-        animation-delay: 100ms;
-      }
-      .delay-200 {
-        animation-delay: 200ms;
-      }
-      .delay-300 {
-        animation-delay: 300ms;
-      }
-      .delay-400 {
-        animation-delay: 400ms;
-      }
-      .delay-500 {
-        animation-delay: 500ms;
-      }
-      .delay-600 {
-        animation-delay: 600ms;
-      }
-      .delay-700 {
-        animation-delay: 700ms;
-      }
-      .delay-800 {
-        animation-delay: 800ms;
-      }
-
-      /* Initial state for animated elements - start invisible */
-      .animate-on-load {
-        opacity: 0;
-      }
-
-      /* Hover scale effect for interactive elements */
-      .hover-scale {
-        transition: transform 0.2s ease-out;
-      }
-      .hover-scale:hover {
-        transform: scale(1.02);
-      }
-
-      /* Hover lift effect with shadow */
-      .hover-lift {
-        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-      }
-      .hover-lift:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
-      }
-      .dark .hover-lift:hover {
-        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.4);
+        background-color: #3f3f46;
       }
     </style>
     <script type="importmap">
@@ -181,7 +97,7 @@
     <link rel="stylesheet" href="/index.css" />
   </head>
   <body
-    class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300"
+    class="bg-slate-50 text-zinc-900 dark:bg-slate-950 dark:text-zinc-100"
   >
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
