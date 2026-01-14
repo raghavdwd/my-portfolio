@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 export const RESUME_DATA: ResumeData = {
-  name: "Raghavendra Dwivedi",
+  name: "Raghvendra Dwivedi",
   role: "Full-Stack Developer",
   summary:
     "I'm a Full-Stack Developer with a deep love for backend systems and cybersecurity. Currently building Linkbase and contributing to open source, I enjoy solving complex problems whether it's optimizing real-time sockets, securing APIs, or just making code run faster. I believe in building software that's not just functional, but resilient and secure.",

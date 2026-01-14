@@ -408,7 +408,7 @@ const App: React.FC = () => {
 
           {/* Footer */}
           <footer className="flex flex-col md:flex-row justify-between items-center text-xs text-slate-400 border-t border-slate-200 dark:border-slate-800 pt-8 pb-8 animate-slide-in-bottom delay-700">
-            <p>© {new Date().getFullYear()} Raghavendra Dwivedi</p>
+            <p>© {new Date().getFullYear()} Raghvendra Dwivedi</p>
             <p>Built with React & Tailwind</p>
           </footer>
         </main>
